@@ -1,7 +1,7 @@
 # CTB 6.0 Corpus Cooker
 #### _ctb6_cooker_
 
-A tool for extracting segmented words/pos tagged words/trees from CTB 6.0 corpus.
+A tool for extracting segmented words/pos tagged words/trees into train, validation, and test divisions from CTB 6.0 corpus.
 
 #### Data formats
 - **sl**: sentence line
@@ -22,12 +22,13 @@ A tool for extracting segmented words/pos tagged words/trees from CTB 6.0 corpus
 
 #### Usage
 ```
-usage: ctb6_cooker.py [-h] [--quiet] --input_data INPUT_DATA
-                      [--output_data OUTPUT_DATA]
-                      [--input_data_format INPUT_DATA_FORMAT]
-                      [--input_data_type {segmented,postagged,bracketed}]
-                      [--output_data_format OUTPUT_DATA_FORMAT]
-                      [--sentence_len_threshold SENTENCE_LEN_THRESHOLD]
+usage: cooker.py [-h] [--quiet] --input_data INPUT_DATA
+                 [--output_data OUTPUT_DATA]
+                 [--input_data_format INPUT_DATA_FORMAT]
+                 [--input_data_type {segmented,postagged,bracketed}]
+                 [--output_data_format OUTPUT_DATA_FORMAT]
+                 [--sentence_len_threshold SENTENCE_LEN_THRESHOLD]
+                 [--exclude_empty_line]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -48,43 +49,46 @@ optional arguments:
   --sentence_len_threshold SENTENCE_LEN_THRESHOLD
                         Sentence length threshold. Sentences whose length are
                         lower than the threshold are ignored (Default: 1)
-  ```
+  --exclude_empty_line  Specify to exclude empty line
+```
 
-  #### Example outputs
-  ```
-  Start time: 20201110_0016
-  
-  ### arguments
-  # quiet=False
-  # input_data=data/segmented
-  # output_data=cooked/
-  # input_data_format=utf8
-  # output_data_format=sl
-  # sentence_len_threshold=1
-  
-  save cooked train data: cooked/cooked_ctb6_train_20201110_0016.sl
-  save cooked valid data: cooked/cooked_ctb6_valid_20201110_0016.sl
-  save cooked test data: cooked/cooked_ctb6_test_20201110_0016.sl
-  ### report
-  ## training data
-  # [POST] sent (train): 23458 ...
-  # [POST] word (train): 641406 ...
-  # [POST] char (train): 1056077 ...
-  # [POST] words/sent (train): min=1 max=242 avg=27.34274021655725
-  # [POST] chars/sent (train): min=1 max=418 avg=45.019907920538834
-  # [POST] chars/word (train): min=1 max=21 avg=1.6465031508903878
-  ## validation data
-  # [POST] sent (valid): 5621 ...
-  # [POST] word (valid): 64740 ...
-  # [POST] char (valid): 126038 ...
-  # [POST] words/sent (valid): min=1 max=145 avg=11.517523572318092
-  # [POST] chars/sent (valid): min=2 max=251 avg=22.422700587084147
-  # [POST] chars/word (valid): min=1 max=36 avg=1.9468334877973432
-  ## testing data
-  # [POST] sent (test): 2964 ...
-  # [POST] word (test): 81746 ...
-  # [POST] char (test): 136385 ...
-  # [POST] words/sent (test): min=1 max=189 avg=27.57962213225371
-  # [POST] chars/sent (test): min=1 max=278 avg=46.0138326585695
-  # [POST] chars/word (test): min=1 max=21 avg=1.6683996770484182
-  ```
+#### Example outputs
+```
+Start time: 20210303_1434
+
+### arguments
+# quiet=False
+# input_data=data/segmented
+# output_data=cooked
+# input_data_format=utf8
+# input_data_type=segmented
+# output_data_format=sl
+# sentence_len_threshold=1
+# exclude_empty_line=False
+
+save cooked train data: cooked/cooked_ctb6_train_20210303_1434.seg.sl
+save cooked valid data: cooked/cooked_ctb6_valid_20210303_1434.seg.sl
+save cooked test data: cooked/cooked_ctb6_test_20210303_1434.seg.sl
+### report
+## training data
+# [POST] sent (train): 22922 ...
+# [POST] word (train): 639798 ...
+# [POST] char (train): 1054469 ...
+# [POST] words/sent (train): min=1 max=242 avg=27.911962306954017
+# [POST] chars/sent (train): min=1 max=418 avg=46.00248669400576
+# [POST] chars/word (train): min=1 max=21 avg=1.6481280029009155
+## validation data
+# [POST] sent (valid): 2040 ...
+# [POST] word (valid): 59838 ...
+# [POST] char (valid): 100199 ...
+# [POST] words/sent (valid): min=1 max=145 avg=29.33235294117647
+# [POST] chars/sent (valid): min=2 max=251 avg=49.1171568627451
+# [POST] chars/word (valid): min=1 max=11 avg=1.6745044954711052
+## testing data
+# [POST] sent (test): 2726 ...
+# [POST] word (test): 81368 ...
+# [POST] char (test): 133939 ...
+# [POST] words/sent (test): min=1 max=189 avg=29.848862802641232
+# [POST] chars/sent (test): min=1 max=278 avg=49.13389581804842
+# [POST] chars/word (test): min=1 max=12 avg=1.6460893717431915
+```
