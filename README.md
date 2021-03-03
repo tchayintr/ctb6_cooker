@@ -6,7 +6,7 @@ A tool for extracting segmented words/pos tagged words/trees into train, validat
 #### Data formats
 - **sl**: sentence line
 - **wl**: word line
--
+
 #### Functions (tested on utf8 encoding)
 - Segmented sentence extraction
 - POS tagged sentence extraction (in development)
